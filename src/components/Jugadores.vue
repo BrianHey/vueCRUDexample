@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="row p-5 mx-0">
-      <Form @QuienEs="addPlayer" operacion="add" />
+      <div class="col-4">
+        <Form @QuienEs="addPlayer" operacion="add" />
+      </div>
 
       <div class="col-8">
         <table class="table">
@@ -52,17 +54,21 @@
       role="dialog"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <Form
-              @editPlayer="editPlayer"
-              operacion="update"
-              :player="jugadorEdit"
-            />
-          </div>
+      <b-modal
+        hide-header="true"
+        hide-footer="true"
+        v-model="show"
+        id="modal-1"
+        title="BootstrapVue"
+      >
+        <div class="col-12">
+          <Form
+            @editPlayer="editPlayer"
+            operacion="update"
+            :player="jugadorEdit"
+          />
         </div>
-      </div>
+      </b-modal>
     </div>
   </div>
 </template>
@@ -77,6 +83,7 @@ export default {
       jugadores: [],
       jugadorEdit: {},
       playerIndex: null,
+      show: false,
     };
   },
   components: {
@@ -93,6 +100,7 @@ export default {
     },
 
     editFields(i) {
+      this.show = true;
       this.playerIndex = i;
       const jugador = Object.assign({}, this.jugadores[i]);
       this.jugadorEdit = jugador;
@@ -104,6 +112,7 @@ export default {
       console.log(jugador);
       this.jugadores[index] = jugador;
       this.$forceUpdate();
+      this.show = false;
     },
   },
 };

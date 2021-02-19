@@ -1,5 +1,5 @@
 <template>
-  <div class="col-4">
+  <div>
     <h1 v-show="operacion == 'add'">Registrar un nuevo jugador</h1>
     <h1 v-show="operacion == 'update'">Editar un jugador</h1>
     <hr />
